@@ -1,7 +1,8 @@
 function refresh() {
-    $.get('/fruits', function (fruits) {
+    $.get('/metasystem', function (metasystem) {
+        console.log(metasystem);
         var list = '';
-        (fruits || []).forEach(function (fruit) { // <1>
+        (metasystem || []).forEach(function (fruit) { // <1>
             list = list
                 + '<tr>'
                 + '<td>' + fruit.id + '</td>'
@@ -15,22 +16,22 @@ function refresh() {
                 + list
                 + '</table>';
         } else {
-            list = "No fruits in database"
+            list = "No metasystem in database"
         }
-        $('#all-fruits').html(list);
+        $('#all-metasystem').html(list);
     });
 }
 
 function deleteFruit(id) {
-    $.ajax('/fruits/' + id, {method: 'DELETE'}).then(refresh);
+    $.ajax('/metasystem/' + id, {method: 'DELETE'}).then(refresh);
 }
 
 $(document).ready(function () {
 
-    $('#create-fruit-button').click(function () {
-        var fruitName = $('#fruit-name').val();
+    $('#create-metaSystem-button').click(function () {
+        var fruitName = $('#metaSystem-name').val();
         $.post({
-            url: '/fruits',
+            url: '/metasystem',
             contentType: 'application/json',
             data: JSON.stringify({name: fruitName})
         }).then(refresh);
